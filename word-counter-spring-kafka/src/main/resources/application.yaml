@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: spring-kafka-app
+  kafka:
+    bootstrap-servers: localhost:19092
+    streams:
+      bootstrap-servers: localhost:19092
+      application-id: word-counter-stream
+
+
