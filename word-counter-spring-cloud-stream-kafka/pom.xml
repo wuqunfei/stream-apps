@@ -6,31 +6,24 @@
         <artifactId>stream-apps</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
-    <artifactId>word-counter-spring-kafka</artifactId>
+    <artifactId>word-counter-spring-cloud-stream-kafka</artifactId>
     <packaging>jar</packaging>
 
-    <name>word-counter-spring-kafka</name>
+    <name>word-counter-spring-cloud-stream-kafka</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
     </properties>
-
     <dependencies>
-        <!--         Spring basic feature-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!--        Spring Kafka Dependency-->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-streams</artifactId>
@@ -40,6 +33,27 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+
+        <!--        Cloud Stream Dependency-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-kafka-streams</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-test-binder</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--        Cloud Stream Dependency-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -91,10 +105,6 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 

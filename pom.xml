@@ -18,6 +18,7 @@
     <modules>
         <module>word-counter-native-kafka</module>
         <module>word-counter-spring-kafka</module>
+        <module>word-counter-spring-cloud-stream-kafka</module>
     </modules>
 
     <properties>

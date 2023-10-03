@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: spring-cloud-app
+  docker:
+    compose:
+      enabled: true
+      file: docker-compose-redpanda.yaml
+  cloud:
+    function:
+      definition: wordProcess
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:19092
+        streams:
+          binder:
+            application-id: spring-cloud-steam-app
+      bindings:
+        wordProcess-in-0:
+          destination: input-word-process
+        wordProcess-out-0:
+          destination: output-word-process
+
+
+
+
