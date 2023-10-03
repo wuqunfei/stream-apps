@@ -9,12 +9,14 @@ import org.apache.kafka.streams.TestInputTopic;
 import org.apache.kafka.streams.TestOutputTopic;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.TopologyTestDriver;
+import org.apache.kafka.streams.state.KeyValueStore;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Properties;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordCounterProcessorUnitTest {
 
@@ -37,16 +39,27 @@ class WordCounterProcessorUnitTest {
                     new StringDeserializer(),
                     new LongDeserializer());
 
+            inputTopic.pipeInput("", "hello world");
             inputTopic.pipeInput("", "hello munich");
-            inputTopic.pipeInput("", "hello berlin");
+
+
+            KeyValueStore<String, Long> keyValueStore = testDriver.getKeyValueStore("counter-store");
+
+            assertEquals(2L,keyValueStore.get("hello"));
+            assertEquals(1L,keyValueStore.get("world"));
+            assertEquals(1L,keyValueStore.get("munich"));
+
+
             List<KeyValue<String, Long>> expectation = List.of(
                     KeyValue.pair("hello", 1L),
-                    KeyValue.pair("munich", 1L),
+                    KeyValue.pair("world", 1L),
                     KeyValue.pair("hello", 2L),
-                    KeyValue.pair("berlin", 1L)
+                    KeyValue.pair("munich", 1L)
             );
+
             List<KeyValue<String, Long>> transformedValues = outputTopic.readKeyValuesToList();
             assertThat(transformedValues).hasSameElementsAs(expectation);
+
         }
 
     }
