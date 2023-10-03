@@ -9,15 +9,15 @@ import java.util.Arrays;
 import java.util.function.Function;
 
 @SpringBootApplication
-public class StreamsCloudApplication {
+public class WordCounterCloudApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StreamsCloudApplication.class, args);
+        SpringApplication.run(WordCounterCloudApplication.class, args);
     }
 
     @Bean
     public Function<KStream<String, String>, KStream<String, Long>> wordProcess() {
-        return StreamsCloudApplication::apply;
+        return WordCounterCloudApplication::apply;
     }
 
     private static KStream<String, Long> apply(KStream<String, String> stream) {
