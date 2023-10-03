@@ -18,9 +18,11 @@ import java.util.Properties;
 public class WordCounterApp {
     public static void main(String[] args) {
 
-        Properties configuration = createProperties();
         StreamsBuilder builder = new StreamsBuilder();
-        Topology topology = createTopology(builder);
+        WordCounterApp app = new WordCounterApp();
+
+        Properties configuration = app.createProperties();
+        Topology topology = app.createTopology(builder);
 
         KafkaStreams streams = new KafkaStreams(topology, configuration);
         streams.start();
@@ -28,7 +30,7 @@ public class WordCounterApp {
         Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
     }
 
-    public static Properties createProperties() {
+    public Properties createProperties() {
         Properties properties = new Properties();
         String bootstrapServers = "localhost:19092";
         properties.put(StreamsConfig.APPLICATION_ID_CONFIG, "native-kafka-app");
@@ -40,7 +42,7 @@ public class WordCounterApp {
         return properties;
     }
 
-    public static Topology createTopology(StreamsBuilder builder) {
+    public Topology createTopology(StreamsBuilder builder) {
         String inputTopic = "input-native-topic";
         String outputTopic = "output-native-topic";
         KStream<String, String> textLines = builder.stream(inputTopic);
