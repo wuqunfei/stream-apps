@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WordCounterProcessorUnitTest {
 
     @Test
-    public void processWordCounter() {
+    public void giveInputMsg_thenReceiveOnOutput() {
 
         StreamsBuilder streamsBuilder = new StreamsBuilder();
         WordCounterProcessor processor = new WordCounterProcessor();
