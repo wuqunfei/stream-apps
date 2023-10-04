@@ -10,6 +10,8 @@ import org.apache.kafka.streams.TestOutputTopic;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.TopologyTestDriver;
 import org.apache.kafka.streams.state.KeyValueStore;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -43,7 +45,7 @@ class WordCounterProcessorUnitTest {
             inputTopic.pipeInput("", "hello munich");
 
 
-            KeyValueStore<String, Long> keyValueStore = testDriver.getKeyValueStore("counter-store");
+            KeyValueStore<String, Long> keyValueStore = testDriver.getKeyValueStore(WordCounterProcessor.COUNTER_STORE);
 
             assertEquals(2L,keyValueStore.get("hello"));
             assertEquals(1L,keyValueStore.get("world"));
@@ -61,6 +63,16 @@ class WordCounterProcessorUnitTest {
             assertThat(transformedValues).hasSameElementsAs(expectation);
 
         }
+
+    }
+
+    @AfterEach
+    void tearDown() {
+
+    }
+
+    @BeforeEach
+    void setUp() {
 
     }
 }

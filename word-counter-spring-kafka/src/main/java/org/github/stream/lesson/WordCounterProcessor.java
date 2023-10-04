@@ -13,6 +13,7 @@ public class WordCounterProcessor {
 
     public static final String INPUT_TOPIC = "input-topic";
     public static final String OUTPUT_TOPIC = "output-topic";
+    public static final String COUNTER_STORE = "counter-store";
 
     @Autowired
     void process(StreamsBuilder builder) {
@@ -20,7 +21,7 @@ public class WordCounterProcessor {
         KTable<String, Long> wordCounts = inputStream
                 .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
                 .groupBy((key, word) -> word, Grouped.with(Serdes.String(), Serdes.String()))
-                .count(Materialized.as("counter-store"));
+                .count(Materialized.as(COUNTER_STORE));
         KStream<String, Long> outputStream = wordCounts.toStream();
         outputStream.to(OUTPUT_TOPIC, Produced.with(Serdes.String(), Serdes.Long()));
     }
