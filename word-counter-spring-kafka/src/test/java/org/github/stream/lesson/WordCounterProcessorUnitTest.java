@@ -61,18 +61,7 @@ class WordCounterProcessorUnitTest {
 
             List<KeyValue<String, Long>> transformedValues = outputTopic.readKeyValuesToList();
             assertThat(transformedValues).hasSameElementsAs(expectation);
-
         }
-
-    }
-
-    @AfterEach
-    void tearDown() {
-
-    }
-
-    @BeforeEach
-    void setUp() {
 
     }
 }
