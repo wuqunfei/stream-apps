@@ -10,5 +10,8 @@ spring:
     streams:
       bootstrap-servers: localhost:19092
       application-id: word-counter-stream
+    consumer:
+      group-id: spring-word-consumer
+      auto-offset-reset: earliest
 
 
